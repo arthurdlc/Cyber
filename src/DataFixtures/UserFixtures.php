@@ -18,10 +18,10 @@ class UserFixtures extends Fixture
         $superAdmin = new User();
         $superAdmin->setEmail('superadmin@domaine.tld');
         $plaintextPassword="superadmin";
-        $hashedPassword = $this->passwordHasher($superAdmin, $plaintextPassword);
+        $hashedPassword = $this->passwordHasher->hashPassword($superAdmin, $plaintextPassword);
         $superAdmin->setPassword($hashedPassword);
+        $superAdmin->setRoles(["ROLE_SUPER_ADMIN"]);
         $manager->persist($superAdmin);
-
         $manager->flush();
     }
 }
