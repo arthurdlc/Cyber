@@ -25,13 +25,7 @@ class Page
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $text = null;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'pages')]
-    private Collection $Category;
 
-    public function __construct()
-    {
-        $this->Category = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -74,27 +68,5 @@ class Page
         return $this;
     }
 
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getCategory(): Collection
-    {
-        return $this->Category;
-    }
-
-    public function addCategory(Category $category): self
-    {
-        if (!$this->Category->contains($category)) {
-            $this->Category->add($category);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): self
-    {
-        $this->Category->removeElement($category);
-
-        return $this;
-    }
+  
 }
