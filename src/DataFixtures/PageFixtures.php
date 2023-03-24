@@ -16,9 +16,21 @@ class PageFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $home = new Page();
+        $home->setNumPage(1);
         $home->setTitle($this->translator->trans("Home"));
         $home->setText("<h1>" . $this->translator->trans("Home") . "</h1>");
         $manager->persist($home);
+
+        $formationcenter = new Page();
+        $formationcenter->setNumPage(2);
+        $formationcenter->setTitle($this->translator->trans("Formation Center"));
+        $formationcenter->setText("<h1>" . $this->translator->trans("Formation Center") . "</h1>");
+        $manager->persist($formationcenter);
+
+        $formationcenter = new Page();
+        $formationcenter->setTitle($this->translator->trans("Formation Center"));
+        $formationcenter->setText("<h1>" . $this->translator->trans("Formation Center") . "</h1>");
+        $manager->persist($formationcenter);
 
         $manager->flush();
     }

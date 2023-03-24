@@ -14,7 +14,7 @@ class PageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('title');
-
+        $builder->add('num_page');
         $builder->add('text',CKEditorType::class);
     }
 

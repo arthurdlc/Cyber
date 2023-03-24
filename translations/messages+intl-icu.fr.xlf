@@ -85,6 +85,38 @@
         <source>🏡Home</source>
         <target>🏡Accueil</target>
       </trans-unit>
+      <trans-unit id="dUOYu_o" resname="Formation Center">
+        <source>Formation Center</source>
+        <target>Centre de Formation</target>
+      </trans-unit>
+      <trans-unit id="tRLZfny" resname="User">
+        <source>User</source>
+        <target>Utilisateur</target>
+      </trans-unit>
+      <trans-unit id="DJmt6ML" resname="User Index">
+        <source>User Index</source>
+        <target>Liste des utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="XEiQMIv" resname="Add new User">
+        <source>Add new User</source>
+        <target>Ajouter un nouvel utilisateur</target>
+      </trans-unit>
+      <trans-unit id="_8e_aDo" resname="Formations">
+        <source>Formations</source>
+        <target>Formations</target>
+      </trans-unit>
+      <trans-unit id="2J0VU7y" resname="Formation Index">
+        <source>Formation Index</source>
+        <target>Liste des formations</target>
+      </trans-unit>
+      <trans-unit id="HsbX2Ac" resname="Add new formation">
+        <source>Add new formation</source>
+        <target>Ajouter de nouvelles formations</target>
+      </trans-unit>
+      <trans-unit id="OHfRSIm" resname="Catalog">
+        <source>Catalog</source>
+        <target>Catalogue</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
