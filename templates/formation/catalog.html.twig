@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formation index{% endblock %}
+
+{% block body %}
+<h1>Formation index</h1>
+{% set number = 0 %}
+<div class="accordion" id="accordionExample">
+    {% for formation in formations %}
+    <div class="accordion-item">
+        {% set number = number +1 %}
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse{{number}}"
+                data-bs-target="#collapse-{{ formation.id }}" aria-expanded="true"
+                aria-controls="collapse-{{ formation.id }}">
+                {{ formation.name }}
+            </button>
+        </h2>
+        <div id="collapse-{{ formation.id }}" class="accordion-collapse collapse {% if number < 2 %} show {% endif %}"
+            data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <strong>Prix : {{ formation.price }} €</strong><br> Nombre de place : {{ formation.capacity }} <br> Date
+                de début de formation : {{ formation.startDateTime ? formation.startDateTime|date('Y-m-d H:i:s') : '' }}
+                <br> Date de fin de formation : {{ formation.endDateTime ? formation.endDateTime|date('Y-m-d H:i:s') :
+                '' }}
+            </div>
+        </div>
+        {% else %}
+        <tr>
+            <td colspan="9">no records found</td>
+        </tr>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
