@@ -117,6 +117,10 @@
         <source>Catalog</source>
         <target>Catalogue</target>
       </trans-unit>
+      <trans-unit id="hCrEGET" resname="Formation catalog">
+        <source>Formation catalog</source>
+        <target>Catalogue de formations</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

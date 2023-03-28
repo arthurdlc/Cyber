@@ -1,36 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formation index{% endblock %}
+{% block title %}{'Formation'|trans}}{% endblock %}
 
 {% block body %}
-<h1>Formation index</h1>
+<h1>{{'Formation catalog'|trans}}</h1>
+
 {% set number = 0 %}
 <div class="accordion" id="accordionExample">
     {% for formation in formations %}
+    {% set number = number + 1 %}
     <div class="accordion-item">
-        {% set number = number +1 %}
         <h2 class="accordion-header">
-            <button class="accordion-button" type="button" data-bs-toggle="collapse{{number}}"
-                data-bs-target="#collapse-{{ formation.id }}" aria-expanded="true"
-                aria-controls="collapse-{{ formation.id }}">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse-{{ number  }}" aria-expanded="true" aria-controls="collapse-{{ number }}">
                 {{ formation.name }}
             </button>
         </h2>
-        <div id="collapse-{{ formation.id }}" class="accordion-collapse collapse {% if number < 2 %} show {% endif %}"
+        <div id="collapse-{{ number }}" class="accordion-collapse collapse {% if number < 2 %} show {% endif %}"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <strong>Prix : {{ formation.price }} €</strong><br> Nombre de place : {{ formation.capacity }} <br> Date
-                de début de formation : {{ formation.startDateTime ? formation.startDateTime|date('Y-m-d H:i:s') : '' }}
-                <br> Date de fin de formation : {{ formation.endDateTime ? formation.endDateTime|date('Y-m-d H:i:s') :
-                '' }}
+                <strong>Description de la formation : {{ formation.content }}</strong> 
+                <br> <strong>Nombre de place :</strong> {{ formation.capacity }}
+                <br> <strong>Prix :</strong> {{ formation.price }} €
+                <br> <strong>Débute le : </strong> {{ formation.startDateTime ? formation.startDateTime|date('d/m/Y à
+                H') : '' }}H{{ formation.endDateTime ? formation.endDateTime|date('i') : '' }}
+                <br> <strong>Termine le : </strong> {{ formation.endDateTime ? formation.endDateTime|date('d/m/Y à H') :
+                '' }}H{{ formation.endDateTime ? formation.endDateTime|date('i') : '' }}
+
             </div>
         </div>
         {% else %}
         <tr>
             <td colspan="9">no records found</td>
         </tr>
-        {% endfor %}
     </div>
+    {% endfor %}
 </div>
 
+{#
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Content</th>
+            <th>Capacity</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>StartDateTime</th>
+            <th>EndDateTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for formation in formations %}
+        <tr>
+            <td>{{ formation.name }}</td>
+            <td>{{ formation.content }}</td>
+            <td>{{ formation.capacity }}</td>
+            <td>{{ formation.price }}</td>
+            <td>{{ formation.description }}</td>
+            <td>{{ formation.startDateTime ? formation.startDateTime|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ formation.endDateTime ? formation.endDateTime|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="10">no records found</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+#}
 {% endblock %}
