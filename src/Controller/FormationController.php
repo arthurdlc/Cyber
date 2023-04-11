@@ -19,31 +19,108 @@ class FormationController extends AbstractController
     #[Route('/pdf/{id}', name:'app_formation_pdf', methods:['GET'])]
 function pdf(Formation $formation): Response
     {
-    $pdf = new \TCPDF();
-    $pdf->SetCreator(PDF_CREATOR);
-    $pdf->SetAuthor('SIO1 TEAM');
-    $pdf->SetTitle($formation->getId());
-    $pdf->SetSubject('TCPDF Tutorial');
-    $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
-    $pdf->setPrintHeader(false);
-    $pdf->setPrintFooter(false);
-    $pdf->AddPage();
-   
-    $pdf->setCellPaddings(1, 1, 1, 1);
-    $pdf->setCellMargins(0, 0, 1, 1);
-    $pdf->Image('img/fcpro3.jpg', 10, 12, 30,26, 'JPG', '', '', true, 150, '', false, false, 0, false, false, false);
-    $pdf->SetFont('helvetica', 'b', 18);
-    $pdf->SetFillColor(160, 222, 255);
-    $pdf->setTextColor(0,63,144);
-    $pdf->setXY(41,10);
-    $pdf->MultiCell(159, 20, "Programme de Formation", 1, 'C', 1, 1, '', '', true, 0, false, true, 0, 'M');
-    $pdf->setTextColor(0,0,0);
-    $pdf->SetFont('helvetica', 'b', 16);
-    $pdf->setXY(41,31);
-    $pdf->SetFillColor(240, 240, 240);
-    $pdf->MultiCell(159, 10, $formation->getName(), 0, 'C', 1, 1, '', '', true, 0, false, true, 10, 'M');
+        $pdf = new \TCPDF();
 
-    return $pdf->Output('fc_pro' . $formation->getId() . ".pdf");
+        $pdf->SetAuthor('SIO TEAM ! 💻');
+        $pdf->SetTitle($formation->getName());
+        $pdf->SetFont('times', '', 14);
+        $pdf->setCellPaddings(1, 1, 1, 1);
+        $pdf->setCellMargins(1, 1, 1, 1);
+        $pdf->setPrintHeader(false);
+        $pdf->setPrintFooter(false);
+
+        $pdf->AddPage();
+
+        
+        $pdf->SetFont('helvetica', 'B', 20);
+        $pdf->SetFillColor(160,222,255);
+        $pdf->SetTextColor(0, 63,144);
+        $pdf->Image('images/fcpro.jpg', 10, 10, 37, 35, 'JPG', 'https://fcpro-apain.bts.sio-ndlp.fr/', '', true, 150, '', false, false, 0, false, false, false);
+        $pdf->MultiCell(187, 20, "PROGRAMME DE FORMATION", 0, 'C', 1, 1, '', '', true, 0, false, true, 20, 'M');
+
+        $pdf->SetFont('helvetica', 'B', 17);
+        $pdf->SetFillColor(225,225,230);
+        $pdf->SetTextColor(0,0,0);
+        $pdf->MultiCell(187, 10, $formation->getName(), 0, 'C', 1, 1, '', '', true);
+        
+        $pdf->setCellPaddings(3,3,3,3);
+        $textg = '
+        <style> .blue { color: rgb(0, 63,144); } .link { color: rgb(100,0,0); }</style>
+        <br>
+        <p class="blue">
+<b>Tarifs :</b></p><p>
+'. $formation->getPrice() .' € net.
+        </p><br>
+        <p class="blue">
+<b>Modalités :</b>
+        </p><p>
+Formation individuelle<br>
+2 journées de formation en présentiel<br>
+14 heures (2x7 heures)
+        </p><br>
+        <p class="blue">
+<b>Contact :</b>
+        </p><p>
+<b>Alexia HEBERT, responsable de FCPRO</b><br>
+Service de Formation Professionnelle<br>
+Continue de l’OGEC Notre Dame de la Providence<br>
+<br>
+9, rue chanoine Bérenger BP 340, 50300 AVRANCHES.<br>
+Tel 02 33 58 02 22<br>
+mail : <span class="link">fcpro@ndlpavranches.fr</span><br>
+<br>
+N° activité 25500040250<br>
+OF certifié QUALIOPI pour les actions de formations<br>
+<br>
+Site Web : <span class="link">https://ndlpavranches.fr/fc-pro/</span><br>
+        </p>';
+
+        $pdf->SetFont('helvetica', '', 11);
+        $pdf->SetFillColor(225,225,230);
+        $pdf->writeHTMLCell(65, 230, "", "", $textg, 0, 0, 1, true, '', true);
+
+        $textd = '
+        <style>hr { color: rgb(0, 63,144); }</style>
+        <p><b>Objectif de la formation</b>
+        <hr>
+        <ul><li>Objectif...</li><li>Objectif...</li><li>Objectif...</li></ul>
+        <b>Prérequis necessaire / public visé</b>
+        <hr>
+        <ul><li>Prérequis...</li><li>Prérequis...</li></ul>
+        <b>Modalités d\'accès et d\'inscription</b>
+        <hr><br>
+        <div>
+<u>Dates</u> : '. $formation->getStartDateTime()->format('d/m/Y') .' à '. $formation->getEndDateTime()->format('d/m/Y') .'<br>
+<u>Lieu</u> : ..
+<br><br>
+Nombre de stagiaires minimal : 0 – Nombre de stagiaires maximal : '. $formation->getCapacity() .'<br>
+<i>Si le minimum requis de participants n’est pas atteint la session de formation
+ne pourra avoir lieu.</i>
+<br><br>
+
+<b>Le chef d’établissement doit inscrire ses personnels auprès de FC PRO
+(contact par mail ou par téléphone) au plus tard 7 jours avant le début de
+la formation et faire la demande de prise  + gros zgeg en charge (sur OPCABOX pour
+le personnel OGEC, auprès de FORMIRIS pour le personnel enseignant)
+au plus tard 15 jours avant la date de début de la formation. L’inscription
+des personnels enseignants sur FORMIRIS devra se faire 7 jours avant
+la date de début de formation.</b></div><br>
+<b>Moyens pédagogiques et techniques</b>
+        <hr><br>
+        <div>Supports visuels (power-point), apports théoriques et mises en situation.</div><br>
+        <b>Modalité d\'évaluation</b>
+        <hr><br>
+        <div>Questionnaire de positionnement en début de formation + recueil des attentes
+des participants.
+Questionnaire d’évaluation des connaissances acquises en fin de formation.
+Evaluation de satisfaction de la formation par les stagiaires.</div>
+        </p>';
+
+        $pdf->SetFont('helvetica', '', 10);
+        $pdf->SetFillColor(255,255,255);
+        $pdf->writeHTMLCell(120, 230, "", "", $textd, 0, 0, 1, true, '', true);
+
+        return $pdf->Output('fcpro-formation-' . $formation->getId() . '.pdf','I');
 }
 #[Route('/catalog', name:'app_formation_catalog', methods:['GET'])]
 function catalog(FormationRepository $formationRepository): Response
