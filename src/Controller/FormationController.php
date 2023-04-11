@@ -130,7 +130,7 @@ function catalog(FormationRepository $formationRepository): Response
     ]);
 }
 
-#[Route('/{futur}', name:'app_formation_futur', methods:['GET'])]
+#[Route('/futur', name:'app_formation_futur', methods:['GET'])]
 function futur(FormationRepository $formationRepository): Response
     {
     return $this->render('formation/futur.html.twig', [
@@ -139,7 +139,7 @@ function futur(FormationRepository $formationRepository): Response
 }
 
 #[Route('/', name:'app_formation_index', methods:['GET'])]
-function index(FormationRepository $formationRepository): Response
+public function index(FormationRepository $formationRepository): Response
     {
     $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -149,7 +149,7 @@ function index(FormationRepository $formationRepository): Response
 }
 
 #[Route('/new', name:'app_formation_new', methods:['GET', 'POST'])]
-function new (Request $request, FormationRepository $formationRepository): Response {
+public function new (Request $request, FormationRepository $formationRepository): Response {
     $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
     $formation = new Formation();
