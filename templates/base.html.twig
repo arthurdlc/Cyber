@@ -5,18 +5,20 @@
   <meta charset="UTF-8">
   <title>{% block title %}Welcome!{% endblock %}</title>
   <link rel="icon" type="image/png" href="../public/img/LOGO-300x300.png">
+  <link href="/css/fontawesome.css" rel="stylesheet">
+  <link href="/css/brands.css" rel="stylesheet">
+  <link href="/css/solid.css" rel="stylesheet">
   {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
   {% block stylesheets %}
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+  <link href="/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <link rel="stylesheet" href="starter-template.css">
   <link rel="stylesheet" href="style.css">
   {{ encore_entry_link_tags('app') }}
   {% endblock %}
-
   {% block javascripts %}
   {{ encore_entry_script_tags('app') }}
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+  <script src="/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
     crossorigin="anonymous"></script>
   {% endblock %}
@@ -25,7 +27,7 @@
 <body>
   <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/page/1">FC-Pro</a>
+      <a class="navbar-brand" href="/page/1"><img src="\img\fcpro3.png" height="48px" width="57px"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,23 +35,22 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/">{{ '🏡Home'|trans}}</a>
+            <a class="nav-link active" aria-current="page" href="/page/1"><i class="fa-sharp fa-solid fa-house"></i> {{
+              'Home'|trans}}</a>
           </li>
-          
-          
-
-
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ 'Catalog'|trans}}
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false"><i class="fa-solid fa-book"></i> {{'Catalog'|trans}}
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/formation/catalog">{{ 'Formation in coming'|trans}}</a></li>
-              <li><a class="dropdown-item" href="#">{{ 'Purpose'|trans}}</a></li>
+              <li><a class="dropdown-item" href="/formation/catalog"><i class="fa-regular fa-clock"></i> {{ 'Formation
+                  in coming'|trans}}</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-file-pen"></i> {{ 'Purpose'|trans}}</a></li>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">{{ 'Give your opinion'|trans}}</a></li>
+              <li><a class="dropdown-item" href="#"><i class="fa-solid fa-comment-dots"></i> {{ 'Give your
+                  opinion'|trans}}</a></li>
             </ul>
           </li>
           {% if is_granted('ROLE_ADMIN') %}
@@ -57,52 +58,60 @@
             <a class="nav-link inactive" aria-current="page" href="#">{{ 'Formation center'|trans}}</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              {{ 'Pages'|trans}}
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false"><i class="fa-regular fa-file-lines"></i> {{ 'Pages'|trans}}
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/page/">{{ 'List Pages'|trans}}</a></li>
-              <li><a class="dropdown-item" href="/page/new">{{ 'Create Pages'|trans}}</a></li>
+              <li><a class="dropdown-item" href="/page/"><i class="fa-solid fa-list"></i> {{ 'List Pages'|trans}}</a>
+              </li>
+              <li><a class="dropdown-item" href="/page/new"><i class="fa-solid fa-plus fa-lg"></i> {{'Create
+                  Pages'|trans}}</a></li>
             </ul>
           </li>
-
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            {{ 'User'|trans}}
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/user">{{ 'User Index'|trans}}</a></li>
-            <li><a class="dropdown-item" href="/register">{{ 'Add new User'|trans}}</a></li>
-          </ul>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-users-between-lines"></i> 
+              {{ 'User'|trans}}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/user"><i class="fa-solid fa-list"></i> {{ 'User Index'|trans}}</a>
+              </li>
+              <li><a class="dropdown-item" href="/register"><i class="fa-solid fa-user-plus"></i> {{ 'Add new
+                  User'|trans}}</a></li>
+            </ul>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="/page" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+              aria-expanded="false"><i class="fa-solid fa-table"></i> 
               {{ 'Formations'|trans}}
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/formation">{{ 'Formation Index'|trans}}</a></li>
-              <li><a class="dropdown-item" href="/formation/new">{{ 'Add new formation'|trans}}</a></li>
+              <li><a class="dropdown-item" href="/formation"><i class="fa-solid fa-list"></i> {{ 'Formation
+                  Index'|trans}}</a></li>
+              <li><a class="dropdown-item" href="/formation/new"><i class="fa-solid fa-plus fa-lg"></i> {{'Add new
+                  formation'|trans}}</a></li>
             </ul>
           </li>
+          {% endif %}
         </ul>
-        {% endif %}
-        <ul class="navbar-nav align-right mb-2 mb-lg-0">
+        
+        <ul class="navbar-nav align-right">
           {% if app.user %}
-          <li class="nav-item "><a class="nav-link text-danger" href="/logout">{{ 'Sign out'|trans}}</a></li>
+          <li class="nav-item "><a class="nav-link text-danger" href="/logout"><i
+                class="fa-solid fa-right-from-bracket text-dark"></i></a></li>
           {% else %}
-          <li class="nav-item"><a class="nav-link text-success" href="/register">{{ 'Sign up'|trans}}</a></li>
-          <li class="nav-item"><a class="nav-link text-primary" href="/login">{{ 'Sign in'|trans}}</a></li>
+          <li class="nav-item"><a class="nav-link text-success" href="/register"><i class="fa-solid fa-up-long"></i> {{ 'Sign up'|trans}}</a></li>
+          <li class="nav-item"><a class="nav-link text-primary" href="/login"><i class="fa-solid fa-arrow-right"></i> {{ 'Sign in'|trans}}</a></li>
           {% endif %}
         </ul>
       </div>
     </div>
   </nav>
-  <div class="col-lg-8 mx-auto p-4 py-md-5">
+  <div class="col-lg-12 mx-auto p-4 py-md-5">
     <main>
       {% block body %}{% endblock %}
     </main>
     <footer class="pt-5 my-5 text-muted border-top">
-      Created by Bryan &middot; &copy; 2023
+      {{'Created by'|trans}} Bryan &middot; &copy; 2023
     </footer>
   </div>
 </body>

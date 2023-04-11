@@ -3,9 +3,9 @@
 {% block title %}New Page{% endblock %}
 
 {% block body %}
-    <h1>Create new Page</h1>
+    <h1>{{'Create new Page'|trans}}</h1>
 
     {{ include('page/_form.html.twig') }}
 
-    <a class="btn btn-primary" href="{{ path('app_page_index') }}">back to list</a>
+    <a class="btn btn-secondary" href="{{ path('app_page_index') }}"><i class="fa-regular fa-circle-left"></i> {{'back to list'|trans}}</a>
 {% endblock %}

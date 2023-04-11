@@ -121,6 +121,140 @@
         <source>Formation catalog</source>
         <target>Catalogue de formations</target>
       </trans-unit>
+      <trans-unit id="YYO_CIP" resname="Download PDF">
+        <source>Download PDF</source>
+        <target>Télécharger le PDF</target>
+      </trans-unit>
+      <trans-unit id="wX9gras" resname="Create new formation">
+        <source>Create new formation</source>
+        <target>Créer une nouvelle formation</target>
+      </trans-unit>
+      <trans-unit id="8qUDcdI" resname="Create new page">
+        <source>Create new page</source>
+        <target>Créer une nouvelle page</target>
+      </trans-unit>
+      <trans-unit id="9xoApz3" resname="An error occured">
+        <source>An error occured</source>
+        <target>Une erreur est intervenue</target>
+      </trans-unit>
+      <trans-unit id="_.EmNJ." resname="Rate a formation">
+        <source>Rate a formation</source>
+        <target>Note la formation</target>
+      </trans-unit>
+      <trans-unit id="zzNMu3h" resname="Tutos">
+        <source>Tutos</source>
+        <target>Tutos</target>
+      </trans-unit>
+      <trans-unit id="n52gtnE" resname="Qualiopi's certifcation">
+        <source>Qualiopi's certifcation</source>
+        <target>Certifcation Qualiopi</target>
+      </trans-unit>
+      <trans-unit id="K1w9JnI" resname="Contact">
+        <source>Contact</source>
+        <target>Contact</target>
+      </trans-unit>
+      <trans-unit id="H5bAc_Q" resname="legal informations">
+        <source>legal informations</source>
+        <target>informations Légales</target>
+      </trans-unit>
+      <trans-unit id="ukRc.zi" resname="Privacy policy">
+        <source>Privacy policy</source>
+        <target>Politique de Confidentialité</target>
+      </trans-unit>
+      <trans-unit id="M4X.5nR" resname="Reserved">
+        <source>Reserved</source>
+        <target>Réservé</target>
+      </trans-unit>
+      <trans-unit id="78cQYzW" resname="Please upload a valid PDF document">
+        <source>Please upload a valid PDF document</source>
+        <target>Merci de télécharger un document PDF valide</target>
+      </trans-unit>
+      <trans-unit id="U0M9PNE" resname="back to list">
+        <source>back to list</source>
+        <target>Retour</target>
+      </trans-unit>
+      <trans-unit id="eIqSpTM" resname="An error is append: ">
+        <source>An error is append: </source>
+        <target>Une erreur est apparue: </target>
+      </trans-unit>
+      <trans-unit id="JttbxdH" resname="Formation&#10;                  in coming">
+        <source>Formation
+                  in coming</source>
+        <target>Formation à venir</target>
+      </trans-unit>
+      <trans-unit id="Lz2qs2m" resname="Give your&#10;                  opinion">
+        <source>Give your
+                  opinion</source>
+        <target>Donner votre opinion</target>
+      </trans-unit>
+      <trans-unit id="BZBkOGm" resname="Create&#10;                  Pages">
+        <source>Create
+                  Pages</source>
+        <target>Créer une page</target>
+      </trans-unit>
+      <trans-unit id="JuN1ZE4" resname="Add new&#10;                  User">
+        <source>Add new
+                  User</source>
+        <target>Ajouter un utilisateur</target>
+      </trans-unit>
+      <trans-unit id="1rMAkQP" resname="Formation&#10;                  Index">
+        <source>Formation
+                  Index</source>
+        <target>Liste une formation</target>
+      </trans-unit>
+      <trans-unit id="SX2V82T" resname="Add new&#10;                  formation">
+        <source>Add new
+                  formation</source>
+        <target>Ajouter une formation</target>
+      </trans-unit>
+      <trans-unit id="4tClSWj" resname="Delete">
+        <source>Delete</source>
+        <target>Supprimer</target>
+      </trans-unit>
+      <trans-unit id="FQn1YfJ" resname="Save">
+        <source>Save</source>
+        <target>Sauvegarder</target>
+      </trans-unit>
+      <trans-unit id="wcEAnT8" resname="Update">
+        <source>Update</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="fOoj.nO" resname="Edit Formation">
+        <source>Edit Formation</source>
+        <target>Modifier Formation</target>
+      </trans-unit>
+      <trans-unit id="D5lam8." resname="no records found">
+        <source>no records found</source>
+        <target>Pas de données trouver</target>
+      </trans-unit>
+      <trans-unit id="N0zZ0iD" resname="Created by">
+        <source>Created by</source>
+        <target>Créer par </target>
+      </trans-unit>
+      <trans-unit id=".hnM_8g" resname="Create new Page">
+        <source>Create new Page</source>
+        <target>Créer une nouvelle page</target>
+      </trans-unit>
+      <trans-unit id="ppPC4Vp" resname="Edit Page">
+        <source>Edit Page</source>
+        <target>Modifier la page</target>
+      </trans-unit>
+      <trans-unit id="fozSBW2" resname="Title">
+        <source>Title</source>
+        <target>Titre</target>
+      </trans-unit>
+      <trans-unit id="vYLPFmm" resname="Number">
+        <source>Number</source>
+        <target>Numéro</target>
+      </trans-unit>
+      <trans-unit id="JiEhxTc" resname="edit">
+        <source>edit</source>
+        <target>Modifier</target>
+      </trans-unit>
+      <trans-unit id="XhROUNc" resname="Page Index">
+        <source>Page Index</source>
+        <target>Liste des pages</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

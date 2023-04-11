@@ -44,6 +44,19 @@ class PageController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}', name: 'app_page_delete', methods: ['POST'])]
+    public function delete(Request $request, Page $page, PageRepository $pageRepository): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        
+        if ($this->isCsrfTokenValid('delete'.$page->getId(), $request->request->get('_token'))) {
+            $pageRepository->remove($page, true);
+        }
+
+        return $this->redirectToRoute('app_page_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
     #[Route('/{id}', name: 'app_page_show', methods: ['GET'])]
     public function show(Page $page): Response
     {
@@ -73,15 +86,6 @@ class PageController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_page_delete', methods: ['POST'])]
-    public function delete(Request $request, Page $page, PageRepository $pageRepository): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        
-        if ($this->isCsrfTokenValid('delete'.$page->getId(), $request->request->get('_token'))) {
-            $pageRepository->remove($page, true);
-        }
 
-        return $this->redirectToRoute('app_page_index', [], Response::HTTP_SEE_OTHER);
-    }
+    
 }

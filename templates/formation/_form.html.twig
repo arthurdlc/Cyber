@@ -1,4 +1,26 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+    <img width="300" height="256" src="{{ asset('uploads/images/' ~ formation.imageFileName) }}">
+    
+    <div class="row">
+        <div class="col">Image : {{ form_widget(form.image) }}</div>
+        <br><div class="col">Nom : {{ form_widget(form.name) }}</div>
+    </div><br>
+    Description : {{ form_widget(form.content) }}<br>
+    <div class="row">
+        <div class="col">Places : {{ form_widget(form.capacity) }}</div>
+        <div class="col">Tarif : {{ form_widget(form.price) }}</div>
+    </div><br>
+
+    <div class="row">
+        <div class="col">Date de début : {{ form_widget(form.startDateTime) }}</div>
+        <div class="col">Date de fin : {{ form_widget(form.endDateTime) }}</div>
+    </div><br>
+
+    <div class="row">
+        <div class="col">Présenter par : {{ form_widget(form.speaker) }}</div>
+        <div class="col">Créer par : {{ form_widget(form.createBy) }}</div>
+    </div><br>
+
+
+    <button class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> {{ button_label|default('Save'|trans) }}</button>
 {{ form_end(form) }}

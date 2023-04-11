@@ -26,12 +26,12 @@
                 H') : '' }}H{{ formation.endDateTime ? formation.endDateTime|date('i') : '' }}
                 <br> <strong>Termine le : </strong> {{ formation.endDateTime ? formation.endDateTime|date('d/m/Y à H') :
                 '' }}H{{ formation.endDateTime ? formation.endDateTime|date('i') : '' }}
-
+                <br><a href="/formation/pdf/{{formation.id}}" class="btn btn-primary" >{{'Download PDF'|trans}}</a>
             </div>
         </div>
         {% else %}
         <tr>
-            <td colspan="9">no records found</td>
+            <td colspan="9">{{'no records found' | trans}}</td>
         </tr>
     </div>
     {% endfor %}
