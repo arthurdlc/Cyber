@@ -7,6 +7,7 @@
     <h1>Create new Formation</h1>
 
     {{ include('formation/_form.html.twig') }}
+    <br>
 
-    <a class="btn btn-danger" href="{{ path('app_formation_index') }}"> {{'back to list' |trans }}</a>
+    <a class="btn btn-secondary" href="{{ path('app_formation_index') }}"><i class="fa-regular fa-circle-left"></i> {{'back to list' |trans }}</a>
 {% endblock %}

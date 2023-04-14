@@ -54,9 +54,6 @@
             </ul>
           </li>
           {% if is_granted('ROLE_ADMIN') %}
-          <li class="nav-item">
-            <a class="nav-link inactive" aria-current="page" href="#">{{ 'Formation center'|trans}}</a>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
               aria-expanded="false"><i class="fa-regular fa-file-lines"></i> {{ 'Pages'|trans}}
@@ -69,19 +66,8 @@
             </ul>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-users-between-lines"></i> 
-              {{ 'User'|trans}}
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/user"><i class="fa-solid fa-list"></i> {{ 'User Index'|trans}}</a>
-              </li>
-              <li><a class="dropdown-item" href="/register"><i class="fa-solid fa-user-plus"></i> {{ 'Add new
-                  User'|trans}}</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="/page" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false"><i class="fa-solid fa-table"></i> 
+              aria-expanded="false"><i class="fa-solid fa-table"></i>
               {{ 'Formations'|trans}}
             </a>
             <ul class="dropdown-menu">
@@ -91,16 +77,31 @@
                   formation'|trans}}</a></li>
             </ul>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false"><i class="fa-solid fa-users-between-lines"></i>
+              {{ 'User'|trans}}
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/user"><i class="fa-solid fa-list"></i> {{ 'User Index'|trans}}</a>
+              </li>
+              <li><a class="dropdown-item" href="/register"><i class="fa-solid fa-user-plus"></i> {{ 'Add new
+                  User'|trans}}</a></li>
+            </ul>
+          </li>
+
           {% endif %}
         </ul>
-        
+
         <ul class="navbar-nav align-right">
           {% if app.user %}
           <li class="nav-item "><a class="nav-link text-danger" href="/logout"><i
                 class="fa-solid fa-right-from-bracket text-dark"></i></a></li>
           {% else %}
-          <li class="nav-item"><a class="nav-link text-success" href="/register"><i class="fa-solid fa-up-long"></i> {{ 'Sign up'|trans}}</a></li>
-          <li class="nav-item"><a class="nav-link text-primary" href="/login"><i class="fa-solid fa-arrow-right"></i> {{ 'Sign in'|trans}}</a></li>
+          <li class="nav-item"><a class="nav-link text-success" href="/register"><i class="fa-solid fa-up-long"></i> {{
+              'Sign up'|trans}}</a></li>
+          <li class="nav-item"><a class="nav-link text-primary" href="/login"><i class="fa-solid fa-arrow-right"></i> {{
+              'Sign in'|trans}}</a></li>
           {% endif %}
         </ul>
       </div>

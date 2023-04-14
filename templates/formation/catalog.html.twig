@@ -19,7 +19,7 @@
         <div id="collapse-{{ number }}" class="accordion-collapse collapse {% if number < 2 %} show {% endif %}"
             data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <strong>Description de la formation : {{ formation.content }}</strong> 
+                <strong>Description de la formation : </strong>{{ formation.content }} 
                 <br> <strong>Nombre de place :</strong> {{ formation.capacity }}
                 <br> <strong>Prix :</strong> {{ formation.price }} €
                 <br> <strong>Débute le : </strong> {{ formation.startDateTime ? formation.startDateTime|date('d/m/Y à

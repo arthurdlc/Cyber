@@ -5,8 +5,9 @@
 {% block body %}
     <h1>{{'Edit Page'|trans}}</h1>
 
-    {{ include('page/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('page/_form.html.twig', {'button_label': ('Update'|trans)}) }}
 
+    <br>
     <button class="btn btn-secondary"><a href="{{ path('app_page_index') }}">{{'back to list'|trans}}</a></button>
 
     {{ include('page/_delete_form.html.twig') }}

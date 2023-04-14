@@ -39,7 +39,7 @@ class FormationRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-
+    
    /**
     * @return Formation[] Returns an array of Formation objects
     */

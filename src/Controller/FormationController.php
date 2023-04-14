@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
+use DateTimeImmutable;
 use App\Entity\Formation;
 use App\Form\Formation1Type;
-use App\Repository\FormationRepository;
 use App\Services\ImageUploaderHelper;
-use DateTimeImmutable;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\FormationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/formation')]
 class FormationController extends AbstractController
@@ -100,7 +101,7 @@ ne pourra avoir lieu.</i>
 
 <b>Le chef d’établissement doit inscrire ses personnels auprès de FC PRO
 (contact par mail ou par téléphone) au plus tard 7 jours avant le début de
-la formation et faire la demande de prise  + gros zgeg en charge (sur OPCABOX pour
+la formation et faire la demande de prise en charge (sur OPCABOX pour
 le personnel OGEC, auprès de FORMIRIS pour le personnel enseignant)
 au plus tard 15 jours avant la date de début de la formation. L’inscription
 des personnels enseignants sur FORMIRIS devra se faire 7 jours avant
@@ -122,6 +123,30 @@ Evaluation de satisfaction de la formation par les stagiaires.</div>
 
         return $pdf->Output('fcpro-formation-' . $formation->getId() . '.pdf','I');
 }
+
+#[Route('/{id}/duplicate', name: 'app_formation_duplicate', methods: ['GET', 'POST'])]
+    public function duplicate(Request $request, FormationRepository $formationRepository, TranslatorInterface $translator, Formation $formation): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+
+        $formation2 = new Formation();
+        $formation2->setCreatedAt($formation->getCreatedAt());
+        $formation2->setCreateBy($formation->getCreateBy());
+        $formation2->setContent($formation->getContent());
+
+        $formation2->setCapacity($formation->getCapacity());
+        $formation2->setStartDateTime($formation->getStartDateTime());
+        $formation2->setEndDateTime($formation->getEndDateTime());
+        $formation2->setImageFileName($formation->getImageFileName());
+        $formation2->setName($formation->getName());
+        $formation2->setPrice($formation->getPrice());
+
+        $formationRepository->save($formation2, true);
+        $this->addFlash('success', $translator->trans('The formation is copied'));
+
+        return $this->redirectToRoute('app_formation_index');
+    }
+
 #[Route('/catalog', name:'app_formation_catalog', methods:['GET'])]
 function catalog(FormationRepository $formationRepository): Response
     {
@@ -130,12 +155,25 @@ function catalog(FormationRepository $formationRepository): Response
     ]);
 }
 
-#[Route('/futur', name:'app_formation_futur', methods:['GET'])]
-function futur(FormationRepository $formationRepository): Response
-    {
-    return $this->render('formation/futur.html.twig', [
-        'formations' => $formationRepository->findAllInTheFutur(),
-    ]);
+#[Route('/futur', name: 'app_formation_futur', methods: ['GET'])]
+public function futur(FormationRepository $formationRepository): Response
+{
+    $formationsPerThree = array();
+
+    $formations = $formationRepository->findAllInTheFutur();
+
+    $i=1; $j=0;
+    foreach ($formations as $formation) {
+        $i++;
+        if ($i>3) {
+            $j++; $i=1;
+        }
+        $formationsPerThree[$j][$i] = $formation;
+    }
+    dump($formations);
+    dump($formationsPerThree);
+    
+    return $this->render('formation/futur.html.twig', ['formationsPerThree' => $formationsPerThree,]);
 }
 
 #[Route('/', name:'app_formation_index', methods:['GET'])]
