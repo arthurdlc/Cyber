@@ -5,14 +5,30 @@ namespace App\Controller;
 use App\Entity\Page;
 use App\Form\PageType;
 use App\Repository\PageRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/page')]
 class PageController extends AbstractController
 {
+    #[Route('/{id}/duplicate', name:'app_page_duplicate', methods:['GET', 'POST'])]
+    function duplicate(Request $request, PageRepository $pageRepository, TranslatorInterface $translator, Page $page): Response
+    {
+    $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+
+    $page2 = new Page();
+    $page2->setTitle($page->getTitle());
+    $page2->setNumPage($page->getNumPage());
+
+
+    $pageRepository->save($page2, true);
+    $this->addFlash('success', $translator->trans('The page is copied'));
+
+    return $this->redirectToRoute('app_page_index');
+}
     #[Route('/', name: 'app_page_index', methods: ['GET'])]
     public function index(PageRepository $pageRepository): Response
     {

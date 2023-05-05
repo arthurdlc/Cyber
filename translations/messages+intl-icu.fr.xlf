@@ -200,7 +200,7 @@
       <trans-unit id="1rMAkQP" resname="Formation&#10;                  Index">
         <source>Formation
                   Index</source>
-        <target>Liste une formation</target>
+        <target>Liste des formations</target>
       </trans-unit>
       <trans-unit id="SX2V82T" resname="Add new&#10;                  formation">
         <source>Add new
@@ -254,6 +254,38 @@
       <trans-unit id="XhROUNc" resname="Page Index">
         <source>Page Index</source>
         <target>Liste des pages</target>
+      </trans-unit>
+      <trans-unit id="rPUpZs7" resname="The formation is copied">
+        <source>The formation is copied</source>
+        <target>La formation est copiée</target>
+      </trans-unit>
+      <trans-unit id="MNVM4e3" resname="Our Formations">
+        <source>Our Formations</source>
+        <target>Nos Formations</target>
+      </trans-unit>
+      <trans-unit id="EDRROVB" resname="Catalogue">
+        <source>Catalogue</source>
+        <target>Catalogue</target>
+      </trans-unit>
+      <trans-unit id="YsVAIxB" resname="Our formations">
+        <source>Our formations</source>
+        <target>Nos Formations à venir</target>
+      </trans-unit>
+      <trans-unit id="QVK_IBL" resname="The page is copied">
+        <source>The page is copied</source>
+        <target>La page est copiée</target>
+      </trans-unit>
+      <trans-unit id="xvhD9sZ" resname="Formation index">
+        <source>Formation index</source>
+        <target>Liste des formations</target>
+      </trans-unit>
+      <trans-unit id="ezuwN7u" resname="User index">
+        <source>User index</source>
+        <target>Liste des utilisateurs</target>
+      </trans-unit>
+      <trans-unit id="x5Pg2aH" resname="Registration">
+        <source>Registration</source>
+        <target>Identication</target>
       </trans-unit>
     </body>
   </file>

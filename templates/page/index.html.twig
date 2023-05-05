@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Page index{% endblock %}
+{% block title %}FC-Pro | Pages{% endblock %}
 
 {% block body %}
     <h1>{{'Page Index'|trans}}</h1>
@@ -20,7 +20,7 @@
                 <td>
                     <a class="btn btn-primary" href="{{ path('app_page_show', {'id': page.id}) }}"><i class="fa-solid fa-eye"></i></a>
                     <a class="btn btn-secondary" href="{{ path('app_page_edit', {'id': page.id}) }}"><i class="fa-solid fa-pencil"></i></a>
-                
+                    <a class="btn btn-dark" href="{{ path('app_page_duplicate', {'id': page.id}) }}"><i class="fa-solid fa-paste"></i></a> 
                 </td>
             </tr>
         {% else %}

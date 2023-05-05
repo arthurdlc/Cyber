@@ -2,17 +2,17 @@
 
 namespace App\Controller;
 
-use DateTimeImmutable;
 use App\Entity\Formation;
 use App\Form\Formation1Type;
-use App\Services\ImageUploaderHelper;
 use App\Repository\FormationRepository;
+use App\Services\ImageUploaderHelper;
+use DateTimeImmutable;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/formation')]
 class FormationController extends AbstractController
@@ -20,37 +20,36 @@ class FormationController extends AbstractController
     #[Route('/pdf/{id}', name:'app_formation_pdf', methods:['GET'])]
 function pdf(Formation $formation): Response
     {
-        $pdf = new \TCPDF();
+    $pdf = new \TCPDF ();
 
-        $pdf->SetAuthor('SIO TEAM ! 💻');
-        $pdf->SetTitle($formation->getName());
-        $pdf->SetFont('times', '', 14);
-        $pdf->setCellPaddings(1, 1, 1, 1);
-        $pdf->setCellMargins(1, 1, 1, 1);
-        $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
+    $pdf->SetAuthor('Alexia Hebert');
+    $pdf->SetTitle($formation->getName());
+    $pdf->SetFont('times', '', 14);
+    $pdf->setCellPaddings(1, 1, 1, 1);
+    $pdf->setCellMargins(1, 1, 1, 1);
+    $pdf->setPrintHeader(false);
+    $pdf->setPrintFooter(false);
 
-        $pdf->AddPage();
+    $pdf->AddPage();
 
-        
-        $pdf->SetFont('helvetica', 'B', 20);
-        $pdf->SetFillColor(160,222,255);
-        $pdf->SetTextColor(0, 63,144);
-        $pdf->Image('images/fcpro.jpg', 10, 10, 37, 35, 'JPG', 'https://fcpro-apain.bts.sio-ndlp.fr/', '', true, 150, '', false, false, 0, false, false, false);
-        $pdf->MultiCell(187, 20, "PROGRAMME DE FORMATION", 0, 'C', 1, 1, '', '', true, 0, false, true, 20, 'M');
+    $pdf->SetFont('helvetica', 'B', 20);
+    $pdf->SetFillColor(160, 222, 255);
+    $pdf->SetTextColor(0, 63, 144);
+    $pdf->Image('images/fcpro.jpg', 10, 10, 37, 35, 'JPG', 'https://fcpro-bdolhin.bts.sio-ndlp.fr/', '', true, 150, '', false, false, 0, false, false, false);
+    $pdf->MultiCell(187, 20, "PROGRAMME DE FORMATION", 0, 'C', 1, 1, '', '', true, 0, false, true, 20, 'M');
 
-        $pdf->SetFont('helvetica', 'B', 17);
-        $pdf->SetFillColor(225,225,230);
-        $pdf->SetTextColor(0,0,0);
-        $pdf->MultiCell(187, 10, $formation->getName(), 0, 'C', 1, 1, '', '', true);
-        
-        $pdf->setCellPaddings(3,3,3,3);
-        $textg = '
+    $pdf->SetFont('helvetica', 'B', 17);
+    $pdf->SetFillColor(225, 225, 230);
+    $pdf->SetTextColor(0, 0, 0);
+    $pdf->MultiCell(187, 10, $formation->getName(), 0, 'C', 1, 1, '', '', true);
+
+    $pdf->setCellPaddings(3, 3, 3, 3);
+    $textg = '
         <style> .blue { color: rgb(0, 63,144); } .link { color: rgb(100,0,0); }</style>
         <br>
         <p class="blue">
 <b>Tarifs :</b></p><p>
-'. $formation->getPrice() .' € net.
+' . $formation->getPrice() . ' €
         </p><br>
         <p class="blue">
 <b>Modalités :</b>
@@ -63,7 +62,7 @@ Formation individuelle<br>
 <b>Contact :</b>
         </p><p>
 <b>Alexia HEBERT, responsable de FCPRO</b><br>
-Service de Formation Professionnelle<br>
+Service de Formation Professionnelle
 Continue de l’OGEC Notre Dame de la Providence<br>
 <br>
 9, rue chanoine Bérenger BP 340, 50300 AVRANCHES.<br>
@@ -76,11 +75,11 @@ OF certifié QUALIOPI pour les actions de formations<br>
 Site Web : <span class="link">https://ndlpavranches.fr/fc-pro/</span><br>
         </p>';
 
-        $pdf->SetFont('helvetica', '', 11);
-        $pdf->SetFillColor(225,225,230);
-        $pdf->writeHTMLCell(65, 230, "", "", $textg, 0, 0, 1, true, '', true);
+    $pdf->SetFont('helvetica', '', 11);
+    $pdf->SetFillColor(225, 225, 230);
+    $pdf->writeHTMLCell(65, 230, "", "", $textg, 0, 0, 1, true, '', true);
 
-        $textd = '
+    $textd = '
         <style>hr { color: rgb(0, 63,144); }</style>
         <p><b>Objectif de la formation</b>
         <hr>
@@ -91,10 +90,10 @@ Site Web : <span class="link">https://ndlpavranches.fr/fc-pro/</span><br>
         <b>Modalités d\'accès et d\'inscription</b>
         <hr><br>
         <div>
-<u>Dates</u> : '. $formation->getStartDateTime()->format('d/m/Y') .' à '. $formation->getEndDateTime()->format('d/m/Y') .'<br>
+<u>Dates</u> : ' . $formation->getStartDateTime()->format('d/m/Y') . ' à ' . $formation->getEndDateTime()->format('d/m/Y') . '<br>
 <u>Lieu</u> : ..
 <br><br>
-Nombre de stagiaires minimal : 0 – Nombre de stagiaires maximal : '. $formation->getCapacity() .'<br>
+Nombre de stagiaires minimal : 0 – Nombre de stagiaires maximal : ' . $formation->getCapacity() . '<br>
 <i>Si le minimum requis de participants n’est pas atteint la session de formation
 ne pourra avoir lieu.</i>
 <br><br>
@@ -117,35 +116,35 @@ Questionnaire d’évaluation des connaissances acquises en fin de formation.
 Evaluation de satisfaction de la formation par les stagiaires.</div>
         </p>';
 
-        $pdf->SetFont('helvetica', '', 10);
-        $pdf->SetFillColor(255,255,255);
-        $pdf->writeHTMLCell(120, 230, "", "", $textd, 0, 0, 1, true, '', true);
+    $pdf->SetFont('helvetica', '', 10);
+    $pdf->SetFillColor(255, 255, 255);
+    $pdf->writeHTMLCell(120, 230, "", "", $textd, 0, 0, 1, true, '', true);
 
-        return $pdf->Output('fcpro-formation-' . $formation->getId() . '.pdf','I');
+    return $pdf->Output('fcpro-formation-' . $formation->getId() . '.pdf', 'I');
 }
 
-#[Route('/{id}/duplicate', name: 'app_formation_duplicate', methods: ['GET', 'POST'])]
-    public function duplicate(Request $request, FormationRepository $formationRepository, TranslatorInterface $translator, Formation $formation): Response
+#[Route('/{id}/duplicate', name:'app_formation_duplicate', methods:['GET', 'POST'])]
+function duplicate(Request $request, FormationRepository $formationRepository, TranslatorInterface $translator, Formation $formation): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
+    $this->denyAccessUnlessGranted('ROLE_SUPER_ADMIN');
 
-        $formation2 = new Formation();
-        $formation2->setCreatedAt($formation->getCreatedAt());
-        $formation2->setCreateBy($formation->getCreateBy());
-        $formation2->setContent($formation->getContent());
+    $formation2 = new Formation();
+    $formation2->setCreatedAt($formation->getCreatedAt());
+    $formation2->setCreateBy($formation->getCreateBy());
+    $formation2->setContent($formation->getContent());
 
-        $formation2->setCapacity($formation->getCapacity());
-        $formation2->setStartDateTime($formation->getStartDateTime());
-        $formation2->setEndDateTime($formation->getEndDateTime());
-        $formation2->setImageFileName($formation->getImageFileName());
-        $formation2->setName($formation->getName());
-        $formation2->setPrice($formation->getPrice());
+    $formation2->setCapacity($formation->getCapacity());
+    $formation2->setStartDateTime($formation->getStartDateTime());
+    $formation2->setEndDateTime($formation->getEndDateTime());
+    $formation2->setImageFileName($formation->getImageFileName());
+    $formation2->setName($formation->getName());
+    $formation2->setPrice($formation->getPrice());
 
-        $formationRepository->save($formation2, true);
-        $this->addFlash('success', $translator->trans('The formation is copied'));
+    $formationRepository->save($formation2, true);
+    $this->addFlash('success', $translator->trans('The formation is copied'));
 
-        return $this->redirectToRoute('app_formation_index');
-    }
+    return $this->redirectToRoute('app_formation_index');
+}
 
 #[Route('/catalog', name:'app_formation_catalog', methods:['GET'])]
 function catalog(FormationRepository $formationRepository): Response
@@ -155,29 +154,31 @@ function catalog(FormationRepository $formationRepository): Response
     ]);
 }
 
-#[Route('/futur', name: 'app_formation_futur', methods: ['GET'])]
-public function futur(FormationRepository $formationRepository): Response
-{
+#[Route('/futur', name:'app_formation_futur', methods:['GET'])]
+function futur(FormationRepository $formationRepository): Response
+    {
     $formationsPerThree = array();
 
     $formations = $formationRepository->findAllInTheFutur();
 
-    $i=1; $j=0;
+    $i = 1;
+    $j = 0;
     foreach ($formations as $formation) {
         $i++;
-        if ($i>3) {
-            $j++; $i=1;
+        if ($i > 3) {
+            $j++;
+            $i = 1;
         }
         $formationsPerThree[$j][$i] = $formation;
     }
     dump($formations);
     dump($formationsPerThree);
-    
-    return $this->render('formation/futur.html.twig', ['formationsPerThree' => $formationsPerThree,]);
+
+    return $this->render('formation/futur.html.twig', ['formationsPerThree' => $formationsPerThree]);
 }
 
 #[Route('/', name:'app_formation_index', methods:['GET'])]
-public function index(FormationRepository $formationRepository): Response
+function index(FormationRepository $formationRepository): Response
     {
     $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -187,7 +188,7 @@ public function index(FormationRepository $formationRepository): Response
 }
 
 #[Route('/new', name:'app_formation_new', methods:['GET', 'POST'])]
-public function new (Request $request, FormationRepository $formationRepository): Response {
+function new (Request $request, FormationRepository $formationRepository): Response{
     $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
     $formation = new Formation();
@@ -197,6 +198,14 @@ public function new (Request $request, FormationRepository $formationRepository)
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
+
+
+
+        if (empty($formation->getImageFileName())) {
+            $formation->setImageFileName("fcpro.png");
+        }
+
+
         $formationRepository->save($formation, true);
 
         return $this->redirectToRoute('app_formation_index', [], Response::HTTP_SEE_OTHER);

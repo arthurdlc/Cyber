@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Formation index{% endblock %}
+{% block title %}FC-Pro | Formation à venir{% endblock %}
 
 {% block body %}
-    <h1>Formation index</h1>
+<h1>{{'Our formations' |trans }}</h1>
 
     <div id="carouselExampleCaptions" class="carousel carousel-dark slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
@@ -17,27 +17,27 @@
         <div class="carousel-inner">
             {% for paquetDe3Formations in formationsPerThree %}
             {%if paquetDe3Formations[1] is defined %}
-            <div class="carousel-item carousel-fit">
-                <img src="/uploads/images/{{ paquetDe3Formations[1].imageFileName }}" class="d-block w-100" alt="1">
-                <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-item carousel-fit" align="center">
+                <img src="/uploads/images/{{ paquetDe3Formations[1].imageFileName }}" class="d-block w-50" alt="1">
+                <div class="carousel-caption d-none d-md-block" style="background-color:rgb(211, 211, 211, 0.75);" >
                     <h5>{{ paquetDe3Formations[1].name }}</h5>
-                    <div class="line-clamp"><p>{{ paquetDe3Formations[1].content }}</p></div>
+                    <div class="line-clamp"><p>{{ paquetDe3Formations[1].content| raw }}</p></div>
                 </div>
             </div>
             {% endif %}
             {%if paquetDe3Formations[2] is defined %}
-            <div class="carousel-item active carousel-fit">
-                <img src="/uploads/images/{{ paquetDe3Formations[2].imageFileName }}" class="d-block w-100" alt="1">
-                <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-item active carousel-fit" align="center">
+                <img src="/uploads/images/{{ paquetDe3Formations[2].imageFileName }}" class="d-block w-50" alt="1">
+                <div class="carousel-caption d-none d-md-block" style="background-color:rgb(211, 211, 211, 0.75);">
                     <h5>{{ paquetDe3Formations[2].name }}</h5>
-                    <div class="line-clamp"><p>{{ paquetDe3Formations[2].content }}</p></div>
+                    <div class="line-clamp"><p>{{ paquetDe3Formations[2].content| raw }}</p></div>
                 </div>
             </div>
             {% endif %}
             {% if paquetDe3Formations[3] is defined %}
-            <div class="carousel-item carousel-fit">
-                <img src="/uploads/images/{{ paquetDe3Formations[3].imageFileName }}" class="d-block w-100" alt="1">
-                <div class="carousel-caption d-none d-md-block">
+            <div class="carousel-item carousel-fit" align="center">
+                <img src="/uploads/images/{{ paquetDe3Formations[3].imageFileName }}" class="d-block w-50" alt="1">
+                <div class="carousel-caption d-none d-md-block" style="background-color:rgb(211, 211, 211, 0.75);">
                     <h5>{{ paquetDe3Formations[3].name }}</h5>
                     <div class="line-clamp"><p>{{ paquetDe3Formations[3].content| raw }}</p></div>
                 </div>
@@ -54,5 +54,4 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <a class="btn btn-primary" href="{{ path('app_formation_new') }}"><i class="fa-solid fa-plus fa-lg"></i> {{'Create new formation'|trans }}</a>
 {% endblock %}

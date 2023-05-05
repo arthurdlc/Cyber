@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Page{% endblock %}
+{% block title %}FC-Pro | Modification des Pages{% endblock %}
 
 {% block body %}
     <h1>{{'Edit Page'|trans}}</h1>
@@ -8,7 +8,8 @@
     {{ include('page/_form.html.twig', {'button_label': ('Update'|trans)}) }}
 
     <br>
-    <button class="btn btn-secondary"><a href="{{ path('app_page_index') }}">{{'back to list'|trans}}</a></button>
-
+    <a href="{{ path('app_page_index') }}" class="btn btn-secondary"><i class="fa-regular fa-circle-left"></i> {{'back to list'|trans}}</a>
+    <div align="right">
     {{ include('page/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
