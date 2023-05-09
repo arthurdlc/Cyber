@@ -285,7 +285,16 @@
       </trans-unit>
       <trans-unit id="x5Pg2aH" resname="Registration">
         <source>Registration</source>
-        <target>Identication</target>
+        <target>Identification</target>
+      </trans-unit>
+      <trans-unit id="wvqzWIj" resname="Formation in&#10;                  coming">
+        <source>Formation in
+                  coming</source>
+        <target>Formation à venir</target>
+      </trans-unit>
+      <trans-unit id="R1lJisK" resname="Create">
+        <source>Create</source>
+        <target>Créer</target>
       </trans-unit>
     </body>
   </file>
