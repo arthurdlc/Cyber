@@ -26,7 +26,7 @@
                 H') : '' }}H{{ formation.endDateTime ? formation.endDateTime|date('i') : '' }}
                 <br> <strong>Termine le : </strong> {{ formation.endDateTime ? formation.endDateTime|date('d/m/Y à H') :
                 '' }}H{{ formation.endDateTime ? formation.endDateTime|date('i') : '' }}
-                <br><a href="/formation/pdf/{{formation.id}}" class="btn btn-primary" >{{'Download PDF'|trans}}</a>
+                <br><a href="/formation/pdf/{{formation.id}}" class="btn btn-primary" target="_blank">{{'Download PDF'|trans}}</a>
             </div>
         </div>
         {% else %}
