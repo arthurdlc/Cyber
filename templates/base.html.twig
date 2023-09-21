@@ -2,11 +2,10 @@
 <html>
 
 <head>
-  <meta charset="UTF-8">
-  <title>{% block title %}Accueil{% endblock %}</title>
-  <link rel="icon" type="image/png" href="../public/img/LOGO-300x300.png">
-  {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-  {% block stylesheets %}
+    <meta charset="UTF-8">
+    <title>{% block title %}Accueil{% endblock %}</title>
+    <link rel="icon" type="image/png" href="../public/img/LOGO-300x300.png">
+    
     <link href="/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="/css/style.css" rel="stylesheet">
@@ -14,108 +13,133 @@
     <link href="/css/fontawesome.css" rel="stylesheet">
     <link href="/css/brands.css" rel="stylesheet">
     <link href="/css/solid.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    {{ encore_entry_link_tags('app') }}
-  {% endblock %}
-  {% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
-    <script src="/js/all.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-            crossorigin="anonymous"></script>
-    <script src="/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  {% endblock %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"></link>
+    <!-- Styles pour la navbar hamburger -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: rgb(14, 14, 14);
+            color:  rgb(255, 0, 0);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: black;
+            transition: width 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar.open {
+            width: 66.66%;
+        }
+
+        .menu-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            color: red;
+            font-size: 24px;
+        }
+
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(-100%, 0);
+            transition: transform 1s ease;
+            text-align: center;
+            top : 40% ;
+            left : 10%;
+            font-familly: fantasy;
+        }
+
+        .navbar.open .menu {
+            transform: translate(0, 0);
+        }
+
+        .menu li {
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-size: 24px;
+        }
+
+        .navbar.open .menu li {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.5s;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: red;
+            display: block;
+        }
+
+        .close-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+        
+    </style>
 </head>
 
-
 <body>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/page/1"><img src="\img\fcpro3.png" height="48px" width="57px"></a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/page/1"><i class="fa-sharp fa-solid fa-house"></i> {{
-              'Home'|trans}}</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false"><i class="fa-solid fa-briefcase"></i> {{'Our Formations'|trans}}
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/formation/catalog"><i class="fa-regular fa-book"></i> {{
-                  'Catalogue'|trans}}</a></li>
-              <li><a class="dropdown-item" href="/formation/futur"><i class="fa-regular fa-clock"></i> {{ 'Formation in
-                  coming'|trans}}</a></li>
+    <!-- Bouton de la navbar hamburger -->
+    <div class="menu-button" onclick="toggleNavbar()">☰</div>
 
-            </ul>
-          </li>
-          {% if is_granted('ROLE_ADMIN') %}
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false"><i class="fa-regular fa-file-lines"></i> {{ 'Pages'|trans}}
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/page/"><i class="fa-solid fa-list"></i> {{ 'List Pages'|trans}}</a>
-              </li>
-              <li><a class="dropdown-item" href="/page/new"><i class="fa-solid fa-plus fa-lg"></i> {{'Create
-                  Pages'|trans}}</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="/page" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false"><i class="fa-solid fa-table"></i>
-              {{ 'Formations'|trans}}
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/formation"><i class="fa-solid fa-list"></i> {{ 'Formation
-                  Index'|trans}}</a></li>
-              <li><a class="dropdown-item" href="/formation/new"><i class="fa-solid fa-plus fa-lg"></i> {{'Add new
-                  formation'|trans}}</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false"><i class="fa-solid fa-users-between-lines"></i>
-              {{ 'User'|trans}}
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="/user"><i class="fa-solid fa-list"></i> {{ 'User Index'|trans}}</a>
-              </li>
-              <li><a class="dropdown-item" href="/register"><i class="fa-solid fa-user-plus"></i> {{ 'Add new
-                  User'|trans}}</a></li>
-            </ul>
-          </li>
-
-          {% endif %}
+    <!-- Navbar hamburger -->
+    <div class="navbar">
+        <!-- Icône de croix pour fermer la navbar -->
+        <div class="close-icon" onclick="toggleNavbar()">✖</div>
+        
+        <ul class="menu">
+            <li><a href="/">Accueil</a></li>
+            <li><a href="/formation/show">Info-Formation</a></li>
+            <li><a href="/login">Connexion</a></li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="/page">Modification de Page</a></li>
+            <li><a href="/formation">Modification de formations</a></li>
+            {% endif %}
+            {% if app.user %}
+            <li><a href="/logout">Déconnexion</a></li>
+            {% endif %}
         </ul>
-
-        <ul class="navbar-nav align-right">
-          {% if app.user %}
-          <li class="nav-item "><a class="nav-link text-danger" href="/logout"><i
-                class="fa-solid fa-right-from-bracket text-dark"></i></a></li>
-          {% else %}
-          <li class="nav-item"><a class="nav-link text-success" href="/register"><i class="fa-solid fa-up-long"></i> {{
-              'Sign up'|trans}}</a></li>
-          <li class="nav-item"><a class="nav-link text-primary" href="/login"><i class="fa-solid fa-arrow-right"></i> {{
-              'Sign in'|trans}}</a></li>
-          {% endif %}
-        </ul>
-      </div>
     </div>
-  </nav>
-  <div class="col-lg-12 mx-auto p-4 py-md-5">
-    <main>
-      {% block body %}{% endblock %}
-    </main>
-    <footer class="pt-5 my-5 text-muted border-top">
-      {{'Created by'|trans}} Bryan & Arthur &middot; &copy; 2023
-    </footer>
-  </div>
+
+    <!-- Votre contenu -->
+    <div class="col-lg-12 mx-auto p-4 py-md-5">
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script>
+        function toggleNavbar() {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('open');
+        }
+    </script>
 </body>
 
 </html>

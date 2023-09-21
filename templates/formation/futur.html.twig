@@ -1,57 +1,132 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html>
 
-{% block title %}FC-Pro | Formation à venir{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Accueil{% endblock %}</title>
+    <link rel="icon" type="image/png" href="../public/img/LOGO-300x300.png">
 
-{% block body %}
-<h1>{{'Our formations' |trans }}</h1>
+    <!-- Styles pour la navbar hamburger -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
 
-    <div id="carouselExampleCaptions" class="carousel carousel-dark slide" data-bs-ride="carousel">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-                aria-current="true" aria-label="Slide 1"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                aria-label="Slide 2"></button>
-            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-inner">
-            {% for paquetDe3Formations in formationsPerThree %}
-            {%if paquetDe3Formations[1] is defined %}
-            <div class="carousel-item carousel-fit" align="center">
-                <img src="/uploads/images/{{ paquetDe3Formations[1].imageFileName }}" class="d-block w-50" alt="1">
-                <div class="carousel-caption d-none d-md-block" style="background-color:rgb(211, 211, 211, 0.75);" >
-                    <h5>{{ paquetDe3Formations[1].name }}</h5>
-                    <div class="line-clamp"><p>{{ paquetDe3Formations[1].content| raw }}</p></div>
-                </div>
-            </div>
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background-color: black;
+            transition: width 0.3s ease;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .navbar.open {
+            width: 66.66%;
+        }
+
+        .menu-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            color: red;
+            font-size: 24px;
+        }
+
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            position: absolute;
+            top: 50%; /* Centrer verticalement */
+            left: 0;
+            transform: translate(-100%, -50%); /* Centrer horizontalement */
+            transition: transform 1s ease;
+            text-align: center;
+        }
+
+        .navbar.open .menu {
+            transform: translate(0, -50%);
+        }
+
+        .menu li {
+            margin-bottom: 20px;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            font-size: 32px;
+        }
+
+        .navbar.open .menu li {
+            opacity: 1;
+            transform: translateX(0);
+            transition-delay: 0.5s;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: red;
+            display: block;
+        }
+
+        .close-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Bouton de la navbar hamburger -->
+    <div class="menu-button" onclick="toggleNavbar()">☰</div>
+
+    <!-- Navbar hamburger -->
+    <div class="navbar">
+        <!-- Icône de croix pour fermer la navbar -->
+        <div class="close-icon" onclick="toggleNavbar()">✖</div>
+
+        <ul class="menu">
+            <li><a href="#">Accueil</a></li>
+            <li><a href="/formation/show">Info-Formation</a></li>
+            <li><a href="/login">Connexion</a></li>
+            {% if is_granted('ROLE_ADMIN') %}
+            <li><a href="/page">Modification de Page</a></li>
             {% endif %}
-            {%if paquetDe3Formations[2] is defined %}
-            <div class="carousel-item active carousel-fit" align="center">
-                <img src="/uploads/images/{{ paquetDe3Formations[2].imageFileName }}" class="d-block w-50" alt="1">
-                <div class="carousel-caption d-none d-md-block" style="background-color:rgb(211, 211, 211, 0.75);">
-                    <h5>{{ paquetDe3Formations[2].name }}</h5>
-                    <div class="line-clamp"><p>{{ paquetDe3Formations[2].content| raw }}</p></div>
-                </div>
-            </div>
+            <li><a href="/formation">Modification de formations</a></li>
+            {% if app.user %}
+            <li><a href="/logout">Déconnexion</a></li>
             {% endif %}
-            {% if paquetDe3Formations[3] is defined %}
-            <div class="carousel-item carousel-fit" align="center">
-                <img src="/uploads/images/{{ paquetDe3Formations[3].imageFileName }}" class="d-block w-50" alt="1">
-                <div class="carousel-caption d-none d-md-block" style="background-color:rgb(211, 211, 211, 0.75);">
-                    <h5>{{ paquetDe3Formations[3].name }}</h5>
-                    <div class="line-clamp"><p>{{ paquetDe3Formations[3].content| raw }}</p></div>
-                </div>
-            </div>
-            {% endif %}
-            {% endfor %}
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
+        </ul>
     </div>
-{% endblock %}
+
+    <!-- Votre contenu -->
+    <div class="col-lg-12 mx-auto p-4 py-md-5">
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script>
+        function toggleNavbar() {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('open');
+        }
+    </script>
+</body>
+
+</html>

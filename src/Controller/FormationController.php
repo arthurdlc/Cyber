@@ -19,7 +19,7 @@ class FormationController extends AbstractController
 {
     #[Route('/pdf/{id}', name:'app_formation_pdf', methods:['GET'])]
 function pdf(Formation $formation): Response
-    {
+        {
     $pdf = new \TCPDF ();
 
     $pdf->SetAuthor('Alexia Hebert');
