@@ -180,7 +180,6 @@ function futur(FormationRepository $formationRepository): Response
 #[Route('/', name:'app_formation_index', methods:['GET'])]
 function index(FormationRepository $formationRepository): Response
     {
-    $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
     return $this->render('formation/index.html.twig', [
         'formations' => $formationRepository->findAll(),
@@ -189,7 +188,6 @@ function index(FormationRepository $formationRepository): Response
 
 #[Route('/new', name:'app_formation_new', methods:['GET', 'POST'])]
 function new (Request $request, FormationRepository $formationRepository): Response{
-    $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
     $formation = new Formation();
     $formation->setCreateBy($this->getUser());
@@ -228,7 +226,6 @@ function show(Formation $formation): Response
 #[Route('/{id}/edit', name:'app_formation_edit', methods:['GET', 'POST'])]
 function edit(Request $request, Formation $formation, ImageUploaderHelper $imageUploaderHelper, FormationRepository $formationRepository, SluggerInterface $slugger): Response
     {
-    $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
     $form = $this->createForm(Formation1Type::class, $formation);
     $form->handleRequest($request);
@@ -252,7 +249,6 @@ function edit(Request $request, Formation $formation, ImageUploaderHelper $image
 #[Route('/{id}', name:'app_formation_delete', methods:['POST'])]
 function delete(Request $request, Formation $formation, FormationRepository $formationRepository): Response
     {
-    $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
     if ($this->isCsrfTokenValid('delete' . $formation->getId(), $request->request->get('_token'))) {
         $formationRepository->remove($formation, true);

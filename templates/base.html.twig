@@ -116,8 +116,8 @@
             <li><a href="/">Accueil</a></li>
             <li><a href="/formation/show">Info-Formation</a></li>
             <li><a href="/login">Connexion</a></li>
-            {% if is_granted('ROLE_ADMIN') %}
             <li><a href="/page">Modification de Page</a></li>
+            {% if is_granted('ROLE_ADMIN') %}
             <li><a href="/formation">Modification de formations</a></li>
             {% endif %}
             {% if app.user %}
